@@ -49,7 +49,7 @@ export default function StepAddress({ data, onChange, onBack, onNext }: Props) {
         <div className="q-num">Q9</div>
         <div className="q-label">
           If there was a simple app that let you track stock, receive buyer orders, send invoices,
-          and see what's selling — how useful would that be to you?
+          and see what's selling, how useful would that be to you?
         </div>
         <div className="range-wrap">
           <input type="range" min={1} max={10} value={data.solution_appeal}
@@ -66,7 +66,7 @@ export default function StepAddress({ data, onChange, onBack, onNext }: Props) {
       <div className="q-block">
         <div className="q-num">Q10</div>
         <div className="q-label">What would make you hesitate to use a new software for your business?</div>
-        <div className="q-hint">Select all that apply — we need to know the real blockers.</div>
+        <div className="q-hint">Select all that apply, we need to know the real blockers.</div>
         <div className="options-grid">
           {checkbox("Cost", "Too expensive")}
           {checkbox("Complexity", "Too complicated to learn")}
@@ -82,7 +82,7 @@ export default function StepAddress({ data, onChange, onBack, onNext }: Props) {
         <div className="q-num">Q11</div>
         <div className="q-label">How much would you be willing to pay monthly for software that genuinely solved your biggest problem?</div>
         <div className="options-grid">
-          {radio("Nothing — I won't pay", "Nothing — I won't pay for software")}
+          {radio("Nothing, I won't pay", "Nothing, I won't pay for software")}
           {radio("₦2,000-₦5,000", "₦2,000 – ₦5,000 / month")}
           {radio("₦5,000-₦15,000", "₦5,000 – ₦15,000 / month")}
           {radio("₦15,000-₦30,000", "₦15,000 – ₦30,000 / month")}

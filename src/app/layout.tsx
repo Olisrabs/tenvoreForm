@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Tenvore — Quick Business Survey",
+  title: "Tenvore: Quick Business Survey",
   description:
     "Help Tenvore build software for Nigerian distributors and wholesalers. Your honest answers shape what we build first.",
 };

@@ -43,7 +43,7 @@ export default function StepDateOfBirth({ data, onChange, onBack, onNext }: Prop
           {checkbox("inventory_tools", "Physical notebook", "Physical notebook / ledger")}
           {checkbox("inventory_tools", "WhatsApp", "WhatsApp messages")}
           {checkbox("inventory_tools", "Accounting software", "Accounting software (Sage, QuickBooks)")}
-          {checkbox("inventory_tools", "No system", "No system — I use memory")}
+          {checkbox("inventory_tools", "No system", "No system, I use memory")}
           {checkbox("inventory_tools", "Other software", "Other software")}
         </div>
       </div>

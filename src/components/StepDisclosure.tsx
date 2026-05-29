@@ -28,12 +28,12 @@ export default function StepDisclosure({
       continueLabel={submitting ? "Submitting…" : "Submit"}
     >
       <p className="step-badge">Stay in the loop&nbsp;·&nbsp; Step 5 of 5</p>
-      <h1 className="page-title">Almost done — anything else to add?</h1>
+      <h1 className="page-title">Anything else to add?</h1>
 
       {/* Q12 */}
       <div className="q-block">
         <div className="q-num">Q12</div>
-        <div className="q-label">Is there anything else you want us to know — or a question you wish we had asked?</div>
+        <div className="q-label">Is there anything else you want us to know or a question you wish we had asked?</div>
         <div className="q-hint">Optional but valuable. Speak freely.</div>
         <textarea className="form-input"
           placeholder="Anything at all..."
@@ -71,7 +71,7 @@ export default function StepDisclosure({
 
       <p style={{ fontSize: 12, color: "var(--gray-400)", lineHeight: 1.6, marginTop: -8 }}>
         Your responses are confidential and used only for product research.
-        Thank you — it genuinely helps.
+        Thank you, it genuinely helps.
       </p>
     </FormShell>
   );

@@ -75,9 +75,18 @@ export default function WelcomeScreen({ onContinue }: { onContinue: () => void }
 
           <div className="welcome-left-footer" style={{ position: "relative", zIndex: 1 }}>
             <div className="welcome-meta">
-              <span>⏱ 3–5 mins</span>
-              <span>🔒 Confidential</span>
-              <span>📋 12 questions</span>
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                3–5 mins
+              </span>
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Confidential
+              </span>
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                12 questions
+              </span>
             </div>
           </div>
         </div>
@@ -95,7 +104,7 @@ export default function WelcomeScreen({ onContinue }: { onContinue: () => void }
             <h1>Help us build something you'll actually use</h1>
             <p>
               We're building software for Nigerian distributors and wholesalers.
-              Answer <strong>12 short questions</strong> across 5 steps — takes about
+              Answer <strong>12 short questions</strong> across 5 steps, takes about
               3 minutes. Your responses are confidential.
             </p>
 

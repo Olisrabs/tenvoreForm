@@ -74,7 +74,7 @@ export default function StepSSN({ data, onChange, onBack, onNext }: Props) {
       {/* Q8 */}
       <div className="q-block">
         <div className="q-num">Q8</div>
-        <div className="q-label">How much time per week do you spend on admin — invoices, tracking stock, chasing payments?</div>
+        <div className="q-label">How much time per week do you spend on admin: invoices, tracking stock, chasing payments?</div>
         <div className="options-grid two-col">
           {radio("Less than 2 hrs", "Less than 2 hrs")}
           {radio("2-5 hrs", "2 – 5 hrs")}
