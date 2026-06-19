@@ -11,7 +11,7 @@ interface FormShellProps {
   continueLabel?: string;
 }
 
-const TOTAL = 5;
+const TOTAL = 1;
 
 const checkIcon = (
   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
