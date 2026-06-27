@@ -43,44 +43,35 @@ serve(async (req: Request) => {
     const html = `
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>New Tenvore Survey Response</title></head>
+<head><meta charset="UTF-8"><title>New MeritUp Waitlist Signup</title></head>
 <body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
   <div style="max-width:640px;margin:32px auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
 
     <!-- Header -->
     <div style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%);padding:32px 40px">
-      <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:-0.3px">📋 New Survey Response</h1>
-      <p style="margin:6px 0 0;color:#94a3b8;font-size:14px">Tenvore Business Survey · ${new Date(data.submitted_at).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}</p>
+      <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:-0.3px">🚀 New Waitlist Signup</h1>
+      <p style="margin:6px 0 0;color:#94a3b8;font-size:14px">MeritUp Early Access · ${new Date(data.submitted_at).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}</p>
     </div>
 
     <!-- Body -->
     <div style="padding:32px 40px">
       <table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;font-size:14px">
         <tbody>
-          ${row("Respondent name", data.name)}
-          ${row("Business type", data.biz_type)}
-          ${row("Primary buyers", data.buyers)}
-          ${row("Inventory tools", arr(data.inventory_tools))}
-          ${row("Order methods", arr(data.order_method))}
-          ${row("Biggest pain", data.biggest_pain)}
-          ${row("Pain areas", arr(data.pain_areas))}
-          ${row("Admin time / week", data.admin_time)}
-          ${row("Solution appeal (1–10)", String(data.solution_appeal))}
-          ${row("Blockers", arr(data.blockers))}
-          ${row("Willingness to pay", data.willingness_to_pay)}
-          ${row("Open feedback", data.open_feedback || "—")}
-          ${row("WhatsApp", data.whatsapp || "Not provided")}
+          ${row("Name", data.name)}
+          ${row("Phone number", data.phone_number)}
+          ${row("Email", data.email || "Not provided")}
+          ${row("State", data.state)}
         </tbody>
       </table>
 
       <p style="margin-top:24px;font-size:13px;color:#6b7280;line-height:1.6">
-        This submission has been saved to your Supabase <code>survey_responses</code> table.
+        This signup has been saved to your Supabase <code>meritup_waitlist_responses</code> table.
       </p>
     </div>
 
     <!-- Footer -->
     <div style="background:#f9fafb;padding:20px 40px;border-top:1px solid #e5e7eb">
-      <p style="margin:0;font-size:12px;color:#9ca3af">Tenvore · Automated survey notification</p>
+      <p style="margin:0;font-size:12px;color:#9ca3af">MeritUp · Automated survey notification</p>
     </div>
   </div>
 </body>
@@ -94,9 +85,9 @@ serve(async (req: Request) => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Tenvore Survey <onboarding@resend.dev>",
+        from: "MeritUp Waitlist <onboarding@resend.dev>",
         to: [NOTIFY_EMAIL],
-        subject: `📋 New Tenvore Response — ${data.name || "Anonymous"} · ${new Date(data.submitted_at).toLocaleDateString("en-GB")}`,
+        subject: `🚀 New Waitlist Signup — ${data.name || "Anonymous"} · ${new Date(data.submitted_at).toLocaleDateString("en-GB")}`,
         html,
       }),
     });

@@ -1,4 +1,4 @@
-// Shared Tenvore app header — no network icons, clean status bar
+// Shared MeritUp app header
 export default function AppHeader({
   showBack = false,
   onBack,
@@ -10,13 +10,11 @@ export default function AppHeader({
     <div className="app-header">
 
       {/* Brand */}
-      <div className="brand-row ">
+      <div className="brand-row">
         <div className="brand-icon">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2L3 7v11h4v-6h6v6h4V7L10 2z" fill="white" />
-          </svg>
+          <img src="/logo.png" alt="MeritUp Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
         </div>
-        <span className="brand-name">Tenvore</span>
+        <span className="brand-name">MERIT_UP</span>
       </div>
 
       {/* Optional back arrow */}

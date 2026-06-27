@@ -1,37 +1,102 @@
 import { supabase } from "./supabase";
 
-export interface SurveyData {
+export interface WaitlistData {
   name: string;
   phone_number: string;
   email?: string;
   state: string;
+  referral_code?: string; // code the user entered (who referred them)
 }
 
-export async function submitSurvey(data: SurveyData): Promise<void> {
-  const submitted_at = new Date().toISOString();
+export interface WaitlistResult {
+  myReferralCode: string; // the unique code generated for this user
+}
 
-  // 1. Save to Supabase (this is the critical step — must succeed)
-  const { error } = await supabase.from("waitlist_responses").insert([
-    { ...data, submitted_at, email: data.email || null },
+export async function submitWaitlist(data: WaitlistData): Promise<WaitlistResult> {
+  const submitted_at = new Date().toISOString();
+  
+  const userPhone = data.phone_number.trim();
+  const referrerPhone = data.referral_code?.trim() || null;
+
+  if (referrerPhone && referrerPhone === userPhone) {
+    throw new Error("You cannot use your own phone number as a referral code.");
+  }
+
+  const myReferralCode = userPhone;
+
+  if (!supabase) {
+    throw new Error("Supabase is not initialized. Please ensure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set in your .env.local file, then restart your development server.");
+  }
+
+  // 1. Check if phone number is already registered
+  const { data: phoneCheck } = await supabase
+    .from("meritup_waitlist_responses")
+    .select("phone")
+    .eq("phone", userPhone)
+    .maybeSingle();
+
+  if (phoneCheck) {
+    throw new Error("This phone number is already registered on the waitlist.");
+  }
+
+  // 2. Check if email is already registered (if provided)
+  if (data.email?.trim()) {
+    const userEmail = data.email.trim();
+    const { data: emailCheck } = await supabase
+      .from("meritup_waitlist_responses")
+      .select("email")
+      .eq("email", userEmail)
+      .maybeSingle();
+
+    if (emailCheck) {
+      throw new Error("This email address is already registered on the waitlist.");
+    }
+  }
+
+  // 3. Save to Supabase
+  const { error } = await supabase.from("meritup_waitlist_responses").insert([
+    {
+      name: data.name,
+      phone: userPhone,
+      email: data.email?.trim() || null,
+      state: data.state,
+      referred_by: referrerPhone,
+      my_referral_code: myReferralCode,
+      submitted_at,
+    },
   ]);
 
   if (error) {
     console.error("Supabase insert error:", error);
     if (error.code === "23505") {
-      throw new Error("ALREADY_JOINED");
+      const msg = error.message.toLowerCase();
+      if (msg.includes("phone")) {
+        throw new Error("This phone number is already registered on the waitlist.");
+      }
+      if (msg.includes("email")) {
+        throw new Error("This email address is already registered on the waitlist.");
+      }
+      throw new Error("This phone number or email is already registered on the waitlist.");
     }
     throw new Error(error.message);
   }
 
-  // 2. Trigger the Edge Function notification (non-fatal — data is already saved)
+  // 2. Trigger the Edge Function notification (non-fatal)
   try {
     const { error: fnError } = await supabase.functions.invoke(
       "notify-submission",
-      { body: { ...data, submitted_at } }
+      { body: { ...data, submitted_at, my_referral_code: myReferralCode } }
     );
     if (fnError) console.warn("Edge function error (non-fatal):", fnError);
   } catch (err) {
     console.warn("Edge function call failed (non-fatal):", err);
   }
+
+  return { myReferralCode };
 }
 
+// Keep legacy export for backward compat (if anything imports it)
+export type SurveyData = WaitlistData;
+export async function submitSurvey(data: WaitlistData): Promise<WaitlistResult> {
+  return submitWaitlist(data);
+}

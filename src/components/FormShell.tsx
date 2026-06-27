@@ -74,11 +74,9 @@ export default function FormShell({
         <div className="fd-topbar">
           <div className="fd-brand">
             <div className="fd-brand-icon">
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                <path d="M10 2L3 7v11h4v-6h6v6h4V7L10 2z" fill="white" />
-              </svg>
+              <img src="/logo.png" alt="MeritUp Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             </div>
-            <span className="fd-brand-name">Tenvore</span>
+            <span className="fd-brand-name">MERIT_UP</span>
           </div>
 
           {/* Step tracker — numbered dots only */}
